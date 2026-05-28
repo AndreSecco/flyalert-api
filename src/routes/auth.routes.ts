@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { googleLogin, profile } from '../controllers/auth.controller'
+import { googleLogin, login, register, profile } from '../controllers/auth.controller'
 import { testSelect } from '../controllers/test_select.controller'
 import { authMiddleware } from '../middlewares/auth.middleware'
 
@@ -16,11 +16,8 @@ router.get('/', (req, res) => {
 
 router.get('/test', testSelect)
 router.post('/google', googleLogin)
-
-router.get(
-    '/profile',
-    authMiddleware,
-    profile
-)
+router.post('/login', login)        // 👈 faltava a / no início
+router.post('/register', register)  // 👈 rota nova
+router.get('/profile', authMiddleware, profile)
 
 export default router
